@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label>Username</label>
+        <input type="text" placeholder="Enter user name"/><br />
+        <label>Password</label>
+        <input type="password" placeholder="Enter password" /><br />
+        <input type="button" value="Login"/>
+    </form><br /><br /><br />
+    <form>
+        <label>Fullname</label>
+        <input type="text" placeholder="Fullname" value="user1"/> <br/>
+        <label>Email</label>
+        <input type="email" required autofocus placeholder="Enter email address" /><br />
+        <label>ContactNo</label>
+        <input type="tel" placeholder="Enter contact number" /><br />
+        <label>Username</label>
+        <input required type="text" placeholder="Enter user name" /><br />
+        <label>Password</label>
+        <input type="password" required placeholder="Enter password" pattern="^[a-zA-Z0-9]{8,30}$" /><br />
+        <label>Gender</label><br/>
+        <input type="radio" name="gender" id="male"/>
+        <label>Male</label>
+        <input type="radio" name="gender" id="female"/>
+        <label>Female</label> <br/>
+        <label>DOB</label>
+        <input type="date" /> <br/>
+        <label>Location</label><br/>
+        <select name="country">
+            <option value="Germany">Germany</option>
+            <option value="India" selected>India</option>
+            <option value="China">China</option>
+            <option value="Japan">Japan</option>
+        </select> <br/>
+        
+
+        <input id="country_name" name="country_name" type="text" list="country" />
+        <datalist id="country">
+            <option value="Australia">
+            <option value="Austria">
+            <option value="Algeria">
+            <option value="Andorra">
+            <option value="Angola">
+        </datalist> <br/>
+        <input type="checkbox" checked disabled />
+        <label>Terms and conditions</label> <br/>
+       
+        <input type="submit" value="Register"  />
+    </form>
+</body>
+</html>
