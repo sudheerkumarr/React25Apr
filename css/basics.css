@@ -1,0 +1,91 @@
+/* Universal selector */
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* type selector */
+p {
+    /* color: yellow; */
+    /* color: #000000 rgb
+    color: #ffffff 
+    color: #35af22; 
+    color: rgb(0,0,0) */
+    color: rgb(100,200, 50)
+
+}
+
+/* 0-9, a-f*/
+
+/* id selector */
+p#p3 {
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 28px;
+    text-decoration: none;
+}
+
+/* class selector */
+p.para {
+    text-transform: capitalize;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Attribute selector */
+img[alt="unsplash image"] {
+    margin: 20px;
+    border: 3px solid greenyellow;
+    padding: 10px;
+    border-radius: 10px;
+}
+/* table {
+    border: 2px solid green;
+}
+tr {
+    border: 2px solid green;
+}
+td {
+    border: 2px solid green;
+}
+th {
+    border: 2px solid green;
+} */
+
+/* applying styles for group of elements */
+table, tr, td, th {
+    border: 2px solid green;
+    border-collapse: collapse;
+}
+table#outer {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+body {
+    background-color: aqua;
+    /* background-image: url("../images/unsplash.jpg") */
+ 
+}
+
+/* li {
+    display: inline;
+    margin-right: 20px;
+} */
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 2px solid #222222;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+li {
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
