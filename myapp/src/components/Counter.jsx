@@ -20,21 +20,9 @@ class Counter extends Component {
   render() {
     return (
       <div>
-        <button
-          type="button"
-          className="btn btn-outline-secondary me-2"
-          onClick={this.decrement}
-        >
-          Decrement
-        </button>
+        <i className="bi bi-dash-square-fill me-1" onClick={this.decrement}></i>
         {this.state.count}
-        <button
-          type="button"
-          className="btn btn-outline-success ms-2"
-          onClick={this.increment}
-        >
-          Increment
-        </button>
+        <i className="bi bi-plus-square-fill ms-1" onClick={this.increment}></i>
       </div>
     );
   }

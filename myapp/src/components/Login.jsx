@@ -10,7 +10,7 @@ class Login extends Component {
       <div>
         <form className="w-50 mx-auto border p-3 mt-5">
           <div className="mb-3">
-            <label forHtml="exampleInputEmail1" className="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
             </label>
             <input
@@ -21,7 +21,7 @@ class Login extends Component {
             />
           </div>
           <div className="mb-3">
-            <label forHtml="exampleInputPassword1" className="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
