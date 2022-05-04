@@ -8,20 +8,25 @@ import Cart from "./components/Cart";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Posts from "./components/Posts";
-import { Switch, Route, Redirect } from "react-router-dom";
+import NotFound from "./components/NotFound";
+import AddPost from "./components/AddPost";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Users from "./components/Users";
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <Posts />
-      {/* <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/register" component={Register} />
-        <Route exact path="/" component={Home} />
-        <Redirect path="/home" to="/" />
-      </Switch> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
