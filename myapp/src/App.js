@@ -9,9 +9,9 @@ import Register from "./components/Register";
 import Home from "./components/Home";
 import Posts from "./components/Posts";
 import NotFound from "./components/NotFound";
-import AddPost from "./components/AddPost";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Users from "./components/Users";
+import AddPost from "./components/AddPost";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/post/add" element={<AddPost />} />
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

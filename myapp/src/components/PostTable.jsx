@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class PostTable extends Component {
   handleDelete = (postId) => {
@@ -16,9 +17,13 @@ class PostTable extends Component {
   render() {
     return (
       <div className="w-75 mx-auto mt-3">
-        <button type="button" className="btn btn-primary float-end">
+        <Link
+          to="/post/add"
+          type="button"
+          className="btn btn-primary float-end"
+        >
           Add Post
-        </button>
+        </Link>
         <table className="table table-striped">
           <thead>
             <tr>
