@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class AddPost extends Component {
+class UpdatePost extends Component {
   state = {
     post: {
       userId: "",
@@ -10,6 +10,18 @@ class AddPost extends Component {
       body: "",
     },
   };
+  componentDidMount() {
+    console.log(this.props.match.params.postId);
+    axios
+      .get(
+        `https://jsonplaceholder.typicode.com/posts/${this.props.match.params.postId}`
+      )
+      .then((res) => {
+        console.log(res);
+        this.setState({ post: res.data });
+      })
+      .catch((err) => console.log(err));
+  }
   handleChange = (event) => {
     // console.log("handleChange");
     // console.log(event);
@@ -24,10 +36,10 @@ class AddPost extends Component {
     event.preventDefault();
     console.log("handleSubmit");
     axios
-      .post("https://jsonplaceholder.typicode.com/posts", this.state.post)
+      .put("https://jsonplaceholder.typicode.com/posts/postId", this.state.post)
       .then((res) => {
         console.log(res.data);
-        alert("Post added successfully!");
+        alert("Updated Post successfully!");
       })
       .catch((err) => console.log(err));
   };
@@ -37,7 +49,7 @@ class AddPost extends Component {
         style={{ marginLeft: "auto", marginRight: "auto" }}
         className="w-50 border p-3 mt-3"
       >
-        <h1>Add Post</h1>
+        <h1>Update Post</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="mb-3">
             <label htmlFor="userId" className="form-label float-start">
@@ -103,4 +115,4 @@ class AddPost extends Component {
   }
 }
 
-export default AddPost;
+export default UpdatePost;

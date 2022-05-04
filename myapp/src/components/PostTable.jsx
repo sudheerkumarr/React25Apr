@@ -31,8 +31,7 @@ class PostTable extends Component {
               <th>Id</th>
               <th>Title</th>
               <th>Body</th>
-              <th>Update</th>
-              <th>Update</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -43,18 +42,15 @@ class PostTable extends Component {
                 <td>{p.title}</td>
                 <td>{p.body}</td>
                 <td>
-                  <button type="button" className="btn btn-secondary">
-                    Update
-                  </button>
-                </td>
-                <td>
-                  <button
+                  <Link to={`/post/update/${p.id}`}>
+                    <i className="bi bi-pencil-square me-3"></i>
+                  </Link>
+
+                  <i
+                    className="bi bi-trash"
                     type="button"
-                    className="btn btn-danger"
                     onClick={() => this.handleDelete(p.id)}
-                  >
-                    Delete
-                  </button>
+                  ></i>
                 </td>
               </tr>
             ))}
