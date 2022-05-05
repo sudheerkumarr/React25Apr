@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Joi from "joi-browser";
 
-class AddPost extends Component {
+class UpdatePost extends Component {
   state = {
     post: {
       userId: "",
@@ -10,33 +9,17 @@ class AddPost extends Component {
       title: "",
       body: "",
     },
-    errors: {},
-    errMsg: "",
   };
-  // schema
-  schema = {
-    userId: Joi.number().integer().required(),
-    id: Joi.number().integer().required(),
-    title: Joi.string().min(3).required(),
-    body: Joi.string().required(),
-  };
-  // validate post with schema
-  validate = () => {
-    const errors = {};
-    const result = Joi.validate(this.state.post, this.schema, {
-      abortEarly: false,
-    });
-    console.log(result);
-    // setting error messages to error properties
-    // ex: errors[username] = "username is required";
-    // ex: errors[password] = "password is required";
-    if (result.error != null)
-      for (let item of result.error.details) {
-        errors[item.path[0]] = item.message;
-      }
-    return Object.keys(errors).length === 0 ? null : errors;
-  };
-
+  componentDidMount() {
+    console.log(this.props);
+    axios
+      .get(`https://jsonplaceholder.typicode.com/posts/10`)
+      .then((res) => {
+        console.log(res);
+        this.setState({ post: res.data });
+      })
+      .catch((err) => console.log(err));
+  }
   handleChange = (event) => {
     // console.log("handleChange");
     // console.log(event);
@@ -50,35 +33,21 @@ class AddPost extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("handleSubmit");
-    // update state with errors after validation
-    this.setState({ errors: this.validate() });
-    console.log(this.state.errors);
-    if (this.state.errors) return;
-    // Send post request to rest api
     axios
-      .post("https://jsonplaceholder.typicode.com/posts", this.state.post)
+      .put("https://jsonplaceholder.typicode.com/posts/postId", this.state.post)
       .then((res) => {
         console.log(res.data);
-        alert("Post added successfully!");
+        alert("Updated Post successfully!");
       })
-      .catch((err) => {
-        console.log(err);
-        this.setState({ errMsg: err.response.data.message });
-      });
+      .catch((err) => console.log(err));
   };
   render() {
-    const { errors, errMsg } = this.state;
     return (
       <div
         style={{ marginLeft: "auto", marginRight: "auto" }}
         className="w-50 border p-3 mt-3"
       >
-        <h1>Add Post</h1>
-        {errMsg && (
-          <div className="alert alert-danger" role="alert">
-            {errMsg}
-          </div>
-        )}
+        <h1>Update Post</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="mb-3">
             <label htmlFor="userId" className="form-label float-start">
@@ -93,7 +62,6 @@ class AddPost extends Component {
               name="userId"
               onChange={this.handleChange}
             />
-            {errors && <small>{errors.userId}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="id" className="form-label float-start">
@@ -107,7 +75,6 @@ class AddPost extends Component {
               name="id"
               onChange={this.handleChange}
             />
-            {errors && <small>{errors.id}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="title" className="form-label float-start">
@@ -121,7 +88,6 @@ class AddPost extends Component {
               name="title"
               onChange={this.handleChange}
             />
-            {errors && <small>{errors.title}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="body" className="form-label float-start">
@@ -135,7 +101,6 @@ class AddPost extends Component {
               name="body"
               onChange={this.handleChange}
             />
-            {errors && <small>{errors.body}</small>}
           </div>
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">
@@ -148,4 +113,4 @@ class AddPost extends Component {
   }
 }
 
-export default AddPost;
+export default UpdatePost;
