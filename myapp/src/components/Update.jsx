@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const UpdatePost = () => {
-  const params = useParams();
-  console.log(params);
-
-  // initialize the state
+const Update = () => {
+  // initialize component state
   const [post, setPost] = useState({
     userId: "",
     id: "",
@@ -14,44 +11,51 @@ const UpdatePost = () => {
     body: "",
   });
 
+  // get post id from url
+  const params = useParams();
+  console.log(params);
+
+  // send get request
   useEffect(() => {
-    console.log("Inside useEffect");
     axios
       .get(`https://jsonplaceholder.typicode.com/posts/${params.postId}`)
       .then((res) => {
-        console.log(res.data);
-        setPost(res.data);
-        // setUserId(res.data.userId);
-        // setId(res.data.id);
-        // setTitle(res.data.title);
-        // setBody(res.data.body);
+        console.log(res);
+        setPost((post) => ({
+          ...post,
+          userId: res.data.userId,
+          id: res.data.id,
+          title: res.data.title,
+          body: res.data.body,
+        }));
       })
       .catch((err) => console.log(err));
   }, []);
+
+  //   const [count, setCount] = useState(0);
+  //   setCount(10);
+
   const handleChange = (event) => {
-    console.log("handleChange");
-    setPost((post) => ({
-      ...post,
-      [event.target.name]: event.target.value,
-    }));
+    // event.target.name - name of the field
+    // event.target.value - value entered in the field
+    //setPost((prevState) => ({ ...prevState, userId: 10, id: 14, title:"title", body:"body" }));
+    setPost((post) => ({ ...post, [event.target.name]: event.target.value }));
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("handleSubmit");
     axios
       .put(`https://jsonplaceholder.typicode.com/posts/${params.postId}`, post)
       .then((res) => {
-        console.log(res.data);
-        alert("Updated Post successfully!");
+        console.log(res);
+        alert("Updated post " + params.postId + " successfully!!");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
-    <div
-      style={{ marginLeft: "auto", marginRight: "auto" }}
-      className="w-50 border p-3 mt-3"
-    >
+    <div className="w-50 mx-auto border p-3 mt-3">
       <h1>Update Post</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -117,4 +121,4 @@ const UpdatePost = () => {
   );
 };
 
-export default UpdatePost;
+export default Update;

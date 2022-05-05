@@ -13,6 +13,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Users from "./components/Users";
 import AddPost from "./components/AddPost";
 import UpdatePost from "./components/UpdatePost";
+import Update from "./components/Update";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path="/posts" element={<Posts />} />
         <Route path="/users" element={<Users />} />
         <Route path="/post/add" element={<AddPost />} />
-        <Route path="/post/update/:postId" element={<UpdatePost />} />
+        <Route path="/post/update/:postId" element={<Update />} />
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
