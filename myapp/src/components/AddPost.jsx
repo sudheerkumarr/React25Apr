@@ -93,7 +93,7 @@ class AddPost extends Component {
               name="userId"
               onChange={this.handleChange}
             />
-            {errors && <small>{errors.userId}</small>}
+            {errors && <small className="text-danger">{errors.userId}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="id" className="form-label float-start">
@@ -107,7 +107,7 @@ class AddPost extends Component {
               name="id"
               onChange={this.handleChange}
             />
-            {errors && <small>{errors.id}</small>}
+            {errors && <small className="text-danger">{errors.id}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="title" className="form-label float-start">
@@ -121,7 +121,7 @@ class AddPost extends Component {
               name="title"
               onChange={this.handleChange}
             />
-            {errors && <small>{errors.title}</small>}
+            {errors && <small className="text-danger">{errors.title}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="body" className="form-label float-start">
@@ -135,7 +135,7 @@ class AddPost extends Component {
               name="body"
               onChange={this.handleChange}
             />
-            {errors && <small>{errors.body}</small>}
+            {errors && <small className="text-danger">{errors.body}</small>}
           </div>
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">
