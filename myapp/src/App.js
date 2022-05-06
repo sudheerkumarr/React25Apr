@@ -12,7 +12,6 @@ import NotFound from "./components/NotFound";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Users from "./components/Users";
 import AddPost from "./components/AddPost";
-import UpdatePost from "./components/UpdatePost";
 import Update from "./components/Update";
 
 function App() {
