@@ -22,21 +22,18 @@ class Products extends Component {
       <div className="row">
         {this.state.products.map((product) => (
           <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div className="card">
-              <img
-                src={product.image}
-                className="card-img-top"
-                alt={product.title}
-              />
+            <div className="card m-2">
+              <Link to={`/products/details/${product.id}`}>
+                <img
+                  src={product.image}
+                  className="card-img-top"
+                  alt={product.title}
+                  height="180px"
+                />
+              </Link>
               <div className="card-body">
                 <p className="card-title">{product.title}</p>
                 <p>Price: {product.price}</p>
-                <Link
-                  to={`/products/${product.id}`}
-                  className="btn btn-primary"
-                >
-                  More info...
-                </Link>
               </div>
             </div>
           </div>

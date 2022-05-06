@@ -12,7 +12,7 @@ const productReducer = (state = initialState, action) => {
     case "ADD_PRODUCT":
       return { ...state, products: [...products, action.payload] }; // [p1, p2, p3, p4]
     case "DELETE_PRODUCT":
-      const products = state.products.filter((p) => p.id !== action.payload.id); // p1, p3
+      const products = state.products.filter((p) => p.id !== action.payload.id); // p1, p3, p4
       return { ...state, products: products };
     case "UPDATE_PRODUCT":
       return state.products.map((p) =>

@@ -12,6 +12,7 @@ import Users from "./components/Users";
 import AddPost from "./components/AddPost";
 import Update from "./components/Update";
 import Products from "./components/Products";
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/users" element={<Users />} />
         <Route path="/post/add" element={<AddPost />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/details/:id" element={<ProductDetails />} />
         <Route path="/post/update/:postId" element={<Update />} />
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />
