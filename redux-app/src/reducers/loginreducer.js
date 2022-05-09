@@ -10,7 +10,7 @@ const loginReducer = (state = initialLoginState, action) => {
     case "ERR_RES":
       return { ...state, errMsg: action.payload };
     case "LOGOUT":
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload, errMsg: "" };
     default:
       return state;
   }

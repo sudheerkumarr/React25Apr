@@ -11,10 +11,10 @@ const Logout = () => {
   }, []);
   return (
     <div>
-      <h1>
-        Logged out successfully! To login again click
-        <Link to="/login">here</Link>.
-      </h1>
+      <p className="fs-5 text-center">
+        Logged out successfully! Click <Link to="/login">here</Link> to Login
+        again.
+      </p>
     </div>
   );
 };

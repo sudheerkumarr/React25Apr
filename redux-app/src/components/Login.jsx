@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import { loginAction, logoutAction } from "../actions/loginactions";
 import { withRouter } from "./withRouter";
 import { connect } from "react-redux";
+import Joi from "joi-browser";
 
 class Login extends Component {
   state = {
@@ -14,37 +15,67 @@ class Login extends Component {
       password: "",
       role: "",
     },
+    errors: {},
   };
+
+  //Step1:  Define schema to validate email and password
+  schema = {
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .required(),
+    password: Joi.string().min(8).max(30).required(),
+    role: Joi.string().required(),
+  };
+  // Step 2: Validate
+  validate = () => {
+    const errors = {}; //object type local variable
+    const result = Joi.validate(this.state.user, this.schema, {
+      abortEarly: false,
+    });
+    if (result.error != null)
+      for (let item of result.error.details) {
+        errors[item.path[0]] = item.message;
+      }
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
+  // Get user input from form and update state object
   handleChange = (event) => {
     const newUser = { ...this.state.user };
     newUser[event.target.name] = event.target.value;
     this.setState({ user: newUser });
   };
+
+  // Send user credentials to backend for validation
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("handleSubmit");
     console.log(this.state.user);
-    // axios
-    //   .post("http://localhost:8080/login", this.state.user)
-    //   .then((res) => {
-    //     console.log(res);
-    //     alert("User Logged in Successfully!");
-    //     this.props.navigate("/home");
-    //   })
-    //   .catch(err=>console.log(err));
+    //Step3:  validate login details with schema
+    this.setState({ errors: this.validate() });
+    console.log(this.state.errors);
+    if (this.state.errors) return;
+
     // dispatch login action
     this.props.loginAction(this.state.user);
-    alert("User Logged in Successfully!");
-    this.props.navigate("/home");
+
+    // If user enters valid credentials, display alert msg and redirect to home page
+    if (this.props.login.user.login) {
+      alert("User Logged in Successfully!");
+      this.props.navigate("/home");
+    }
   };
   render() {
     const { email, password, role } = this.state.user;
     return (
-      <div>
-        <form
-          className="w-50 mx-auto border p-3 mt-5"
-          onSubmit={this.handleSubmit}
-        >
+      <div className="w-50 mx-auto mt-5 ">
+        {this.props.login.errMsg.trim() != "" && (
+          <div className="alert alert-danger" role="alert">
+            {this.props.login.errMsg}
+          </div>
+        )}
+        <p className="text-center fs-3 bg-secondary text-white">Login Form</p>
+        <form className="border p-3 " onSubmit={this.handleSubmit}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
@@ -58,6 +89,7 @@ class Login extends Component {
               onChange={this.handleChange}
               value={email}
             />
+            {this.state.errors && <small>{this.state.errors.email}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">
@@ -71,22 +103,30 @@ class Login extends Component {
               onChange={this.handleChange}
               value={password}
             />
+            {this.state.errors && <small>{this.state.errors.password}</small>}
+          </div>
+          <div>
+            <label htmlFor="role" className="form-label">
+              Role
+            </label>
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              id="role"
+              name="role"
+              onChange={this.handleChange}
+              value={role}
+            >
+              <option selected>Select Role</option>
+              <option value="student">Student</option>
+              <option value="employee">Employee</option>
+              <option value="admin">Admin</option>
+            </select>
+            {this.state.errors && <small>{this.state.errors.role}</small>}
           </div>
 
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            name="role"
-            onChange={this.handleChange}
-            value={role}
-          >
-            <option selected>Select Role</option>
-            <option value="student">Student</option>
-            <option value="employee">Employee</option>
-            <option value="admin">Admin</option>
-          </select>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-danger">
+            <button type="submit" className="btn btn-secondary fs-5">
               Submit
             </button>
           </div>

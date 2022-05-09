@@ -43,11 +43,17 @@ class NavBar extends Component {
                     Posts
                   </NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" aria-current="page" to="/users">
-                    Users
-                  </NavLink>
-                </li>
+                {this.props.user.login && this.props.user.role == "admin" && (
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      aria-current="page"
+                      to="/users"
+                    >
+                      Users
+                    </NavLink>
+                  </li>
+                )}
                 <li className="nav-item">
                   <NavLink
                     className="nav-link"
