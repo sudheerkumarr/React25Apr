@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PostTable from "./PostTable";
 import axios from "axios";
+import { connect } from "react-redux";
 
 class Posts extends Component {
   state = {

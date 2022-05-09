@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 // class component with constructor
 class NavBar extends Component {
@@ -59,11 +60,20 @@ class NavBar extends Component {
               </ul>
 
               <ul className="navbar-nav ms-auto">
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/login">
-                    Login
-                  </NavLink>
-                </li>
+                {this.props.user.login ? (
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/logout">
+                      Logout
+                    </NavLink>
+                  </li>
+                ) : (
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/login">
+                      Login
+                    </NavLink>
+                  </li>
+                )}
+
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/cart">
                     Cart
@@ -78,4 +88,10 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+// funtion to get updates from store
+const mapStateToProps = (state) => {
+  return {
+    user: state.login.user,
+  };
+};
+export default connect(mapStateToProps)(NavBar);

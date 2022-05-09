@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Update = () => {
   // initialize component state
@@ -15,6 +15,8 @@ const Update = () => {
   const params = useParams();
   console.log(params);
 
+  // Navigate
+  const navigate = useNavigate();
   // send get request
   useEffect(() => {
     axios
@@ -48,6 +50,7 @@ const Update = () => {
       .then((res) => {
         console.log(res);
         alert("Updated post " + params.postId + " successfully!!");
+        navigate("/posts");
       })
       .catch((err) => {
         console.log(err);

@@ -13,6 +13,7 @@ import AddPost from "./components/AddPost";
 import Update from "./components/Update";
 import Products from "./components/Products";
 import ProductDetails from "./components/ProductDetails";
+import Logout from "./components/Logout";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/details/:id" element={<ProductDetails />} />
         <Route path="/post/update/:postId" element={<Update />} />
+        <Route path="logout" element={<Logout />} />
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

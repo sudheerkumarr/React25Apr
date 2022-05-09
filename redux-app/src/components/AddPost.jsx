@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Joi from "joi-browser";
+import { withRouter } from "./withRouter";
 
+// this.props.history.push('/home') - react-router-dom v5.x
 class AddPost extends Component {
   state = {
     post: {
@@ -60,6 +62,7 @@ class AddPost extends Component {
       .then((res) => {
         console.log(res.data);
         alert("Post added successfully!");
+        this.props.navigate("/posts");
       })
       .catch((err) => {
         console.log(err);
@@ -148,4 +151,4 @@ class AddPost extends Component {
   }
 }
 
-export default AddPost;
+export default withRouter(AddPost);

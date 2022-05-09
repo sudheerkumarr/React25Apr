@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 class PostTable extends Component {
   handleDelete = (postId) => {
@@ -31,7 +32,9 @@ class PostTable extends Component {
               <th>Id</th>
               <th>Title</th>
               <th>Body</th>
-              <th>Actions</th>
+              {this.props.user.login && this.props.user.role == "admin" && (
+                <th>Actions</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -41,17 +44,19 @@ class PostTable extends Component {
                 <td>{p.id}</td>
                 <td>{p.title}</td>
                 <td>{p.body}</td>
-                <td>
-                  <Link to={`/post/update/${p.id}`}>
-                    <i className="bi bi-pencil-square me-3"></i>
-                  </Link>
+                {this.props.user.login && this.props.user.role == "admin" && (
+                  <td>
+                    <Link to={`/post/update/${p.id}`}>
+                      <i className="bi bi-pencil-square me-3"></i>
+                    </Link>
 
-                  <i
-                    className="bi bi-trash"
-                    type="button"
-                    onClick={() => this.handleDelete(p.id)}
-                  ></i>
-                </td>
+                    <i
+                      className="bi bi-trash"
+                      type="button"
+                      onClick={() => this.handleDelete(p.id)}
+                    ></i>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
@@ -60,5 +65,10 @@ class PostTable extends Component {
     );
   }
 }
-
-export default PostTable;
+// funtion to get updates from store
+const mapStateToProps = (state) => {
+  return {
+    user: state.login.user,
+  };
+};
+export default connect(mapStateToProps)(PostTable);
