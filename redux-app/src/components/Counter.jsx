@@ -19,7 +19,7 @@ class Counter extends Component {
 
   render() {
     return (
-      <div>
+      <div className="w-50 mx-auto">
         <i className="bi bi-dash-square-fill me-1" onClick={this.decrement}></i>
         {this.state.count}
         <i className="bi bi-plus-square-fill ms-1" onClick={this.increment}></i>

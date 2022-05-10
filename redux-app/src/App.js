@@ -14,6 +14,8 @@ import Update from "./components/Update";
 import Products from "./components/Products";
 import ProductDetails from "./components/ProductDetails";
 import Logout from "./components/Logout";
+import Counter from "./components/Counter";
+import Counters from "./components/Counters";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/details/:id" element={<ProductDetails />} />
         <Route path="/post/update/:postId" element={<Update />} />
+        <Route path="/counter" element={<Counter />} />
+        <Route path="/counters" element={<Counters />} />
         <Route path="logout" element={<Logout />} />
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />
